@@ -91,11 +91,7 @@ func excuteCMD(args *selpgArgs) {
 		checkError(err, "File input")
 	}
 
-	if len(args.printDest) == 0 {
-		output2Des(os.Stdout, fin, args.startPage, args.endPage, args.pageLen, args.pageType)
-	} else {
-		output2Des(cmdExec(args.printDest), fin, args.startPage, args.endPage, args.pageLen, args.pageType)
-	}
+	output2Des(args.printDest, fin, args.startPage, args.endPage, args.pageLen, args.pageType)
 }
 
 func checkFileAccess(filename string) {
@@ -106,22 +102,27 @@ func checkFileAccess(filename string) {
 	}
 }
 
-func cmdExec(printDest string) io.WriteCloser {
+func cmdExec(printDest string) (*exec.Cmd, io.WriteCloser) {
 	cmd := exec.Command("lp", "-d"+printDest)
-	fout, err := cmd.StdinPipe()
-	checkError(err, "StdinPipe")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	errStart := cmd.Start()
-	checkError(errStart, "CMD Start")
-	return fout
+	fout, err := cmd.StdinPipe()
+	checkError(err, "Input pipe open\n")
+	return cmd, fout
 }
 
-func output2Des(fout interface{}, fin *os.File, pageStart int, pageEnd int, pageLen int, pageType bool) {
+func output2Des(printDest string, fin *os.File, pageStart int, pageEnd int, pageLen int, pageType bool) {
 
 	lineCount := 0
 	pageCount := 1
 	buf := bufio.NewReader(fin)
+
+	var cmd *exec.Cmd
+	var fout io.WriteCloser
+	if len(printDest) > 0 {
+		cmd, fout = cmdExec(printDest)
+	}
+
 	for true {
 
 		var line string
@@ -143,21 +144,26 @@ func output2Des(fout interface{}, fin *os.File, pageStart int, pageEnd int, page
 		if err == io.EOF {
 			break
 		}
-		checkError(err, "file read in")
+		checkError(err, "file read in\n")
 
 		if (pageCount >= pageStart) && (pageCount <= pageEnd) {
 			var outputErr error
-			if stdOutput, ok := fout.(*os.File); ok {
-				_, outputErr = fmt.Fprintf(stdOutput, "%s", line)
-			} else if pipeOutput, ok := fout.(io.WriteCloser); ok {
-				_, outputErr = pipeOutput.Write([]byte(line))
+			if len(printDest) == 0 {
+				_, outputErr = fmt.Fprintf(os.Stdout, "%s", line)
 			} else {
-				fmt.Fprintf(os.Stderr, "\n[Error]:fout type error. ")
-				os.Exit(8)
+				_, outputErr = fout.Write([]byte(line))
+				checkError(outputErr, "pipe input")
 			}
 			checkError(outputErr, "Error happend when output the pages.")
 		}
 	}
+
+	if len(printDest) != 0 {
+		fout.Close()
+		errStart := cmd.Run()
+		checkError(errStart, "CMD Run")
+	}
+
 	if pageCount < pageStart {
 		fmt.Fprintf(os.Stderr, "\n[Error]: startPage (%d) greater than total pages (%d), no output written\n", pageStart, pageCount)
 		os.Exit(9)
