@@ -1,0 +1,7 @@
+hello, golang.
+There are some useful packages:
+such as os,fmt,strings,pflag.Good good study, 
+Day day up.
+There are
+some other things......
+
