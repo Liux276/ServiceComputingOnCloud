@@ -13,7 +13,7 @@ CLI（Command Line Interface）实用程序是Linux下应用开发的基础。�
 ### 程序实现
 
 #### 流程分析
-   ![CLI流程图]()
+   ![CLI流程图](https://segmentfault.com/img/bVbh06Q?w=565&h=590)
 
    程序按照读取参数、判断参数是否合规、读取文件、确定输出位置并输出顺序执行。当发现错误时抛出错误并终止流程。
 
@@ -194,21 +194,38 @@ CLI（Command Line Interface）实用程序是Linux下应用开发的基础。�
 ---
 ### 程序测试
 * 按文档[ 使用 selpg ](https://www.ibm.com/developerworks/cn/linux/shell/clutil/index.html)章节要求测试该程序
-* 测试文档input_file.txt包含两个换页符
-![测试文档]()
-1. ./selpg -s1 -e1 input_file.txt
-![pic1]()
-2. ./selpg -s1 -e1 < input_file.txt
-![pic2]()
-3. ./selpg -s1 -e2 input_file.txt >output_file
-![pic3]()
-4. ./selpg -s1 -e4 input_file.txt 2>error_file
-![pic4]()
-5. ./selpg -s1 -e4 input_file.txt >output_file 2>error_file
-![pic5]()
-6. ./selpg -s1 -e2 -f input_file.txt
-![pic6]()
-7. ./selpg -s10 -e20 -dlp1 input_file.txt 由于没有打印机所以无法测试，但是可以看到命令正常执行。
-![pic7]()
+* ```cmd测试文档input_file.txt包含两个换页符```
+    ![测试文档](https://segmentfault.com/img/bVbh063?w=617&h=461)
+1. ```cmd
+    ./selpg -s1 -e1 input_file.txt
+    ```
+    ![pic1](https://segmentfault.com/img/bVbh06T?w=518&h=315)
+2. ```cmd 
+    ./selpg -s1 -e1 < input_file.txt
+    ```
+    ![pic2](https://segmentfault.com/img/bVbh06U?w=537&h=316)
+3. ```cmd
+    ./selpg -s1 -e2 input_file.txt >output_file
+    ```
+    ![pic3](https://segmentfault.com/img/bVbh06W?w=615&h=100)
+    ![output1](https://segmentfault.com/img/bVbh07H?w=441&h=360)
+4. ```cmd
+    ./selpg -s1 -e4 input_file.txt 2>error_file
+    ```
+    ![pic4](https://segmentfault.com/img/bVbh07J?w=614&h=332)
+    ![output2](https://segmentfault.com/img/bVbh07K?w=625&h=110)
+5.  ```cmd
+    ./selpg -s1 -e3 input_file.txt >output_file 2>error_file
+    ```
+    ![pic5](https://segmentfault.com/img/bVbh07M?w=456&h=365)
+    ![output3](https://segmentfault.com/img/bVbh07P?w=501&h=118)
+6. ```cmd 
+    ./selpg -s1 -e2 -f input_file.txt
+    ```
+    ![pic6](https://segmentfault.com/img/bVbh07R?w=551&h=243)
+7. ```cmd 
+    ./selpg -s1 -e1 -dlp1 input_file.txt 由于没有打印机所以无法测试，但是可以看到命令正常执行。
+    ```
+    ![pic7](https://segmentfault.com/img/bVbh07T?w=570&h=200)
 ---
-### [GITHUB项目地址](https://github.com/Liux276/ServiceComputingOnCloud/tree/master/CLI%20Command%20application%20-%20selpg)
+### [博客地址](https://segmentfault.com/a/1190000016648238)
