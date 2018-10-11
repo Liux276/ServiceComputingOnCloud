@@ -224,8 +224,9 @@ CLI（Command Line Interface）实用程序是Linux下应用开发的基础。�
     ```
     ![pic6](https://segmentfault.com/img/bVbh07R?w=551&h=243)
 7. ```cmd 
-    ./selpg -s1 -e1 -dlp1 input_file.txt 由于没有打印机所以无法测试，但是可以看到命令正常执行。
+    ./selpg -s1 -e1 -dlp1 input_file.txt
     ```
-    ![pic7](https://segmentfault.com/img/bVbh07T?w=570&h=200)
+    ![pic7](https://segmentfault.com/img/bVbh07R?w=551&h=243)
+    ![打印结果](https://segmentfault.com/img/bVbh2kf?w=828&h=598)
 ---
 ### [博客地址](https://segmentfault.com/a/1190000016648238)

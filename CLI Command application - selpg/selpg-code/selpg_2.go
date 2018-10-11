@@ -158,7 +158,7 @@ func output2Des(printDest string, fin *os.File, pageStart int, pageEnd int, page
 		}
 	}
 
-	if len(printDest) != 0 {
+	if len(printDest) > 0 {
 		fout.Close()
 		errStart := cmd.Run()
 		checkError(errStart, "CMD Run")
