@@ -7,8 +7,11 @@ import (
 )
 
 func main() {
+	//创建新iris对象
 	app := iris.New()
+	//恢复方法
 	app.Use(recover.New())
+	//logger输出器
 	app.Use(logger.New())
 	//输出html
 	// 请求方式: GET
@@ -27,7 +30,8 @@ func main() {
 	// 请求方式: GET
 	// 请求地址: http://localhost:9090/hello
 	app.Get("/hello", func(ctx iris.Context) {
-		ctx.JSON(iris.Map{"message": "Hello Iris!"})
+		ctx.JSON(iris.Map{"message": "Hello World!"})
 	})
+	//监听9090端口
 	app.Run(iris.Addr(":9090")) //9090 监听端口
 }
