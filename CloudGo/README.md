@@ -66,11 +66,11 @@ func main() {
 ---
 #### 服务器测试
 1. 运行服务器：
-	![运行服务器](https://segmentfault.com/img/bVbjD8c?w=558&h=104)
+![运行服务器](https://segmentfault.com/img/bVbjD8c?w=558&h=104)
 2. 浏览器访问：
-	![浏览器访问](https://segmentfault.com/img/bVbjD8e?w=467&h=209)
+![浏览器访问](https://segmentfault.com/img/bVbjD8e?w=467&h=209)
 3. 使用curl对可以正常访问服务器：
-	![Curl访问结果](https://segmentfault.com/img/bVbjD8s?w=582&h=334)
+![Curl访问结果](https://segmentfault.com/img/bVbjD8s?w=582&h=334)
 
 ---
 #### AB测试
